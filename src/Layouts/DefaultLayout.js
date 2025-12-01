@@ -22,22 +22,6 @@ function DefaultLayout({ children }) {
         >
           <i className="fa-solid fa-house icon_home"></i>
         </Link>
-        <Link
-          to="/2"
-          className="layout_navbar_item"
-          data-tooltip-id="hotel-tooltip"
-          data-tooltip-content="Chung cư mini"
-        >
-          <i className="fa-solid fa-hotel icon_home"></i>
-        </Link>
-        <Link
-          to="/3"
-          className="layout_navbar_item"
-          data-tooltip-id="user-tooltip"
-          data-tooltip-content="Ở ghép"
-        >
-          <i className="fa-solid fa-user-group icon_home"></i>
-        </Link>
       </div>
 
       <div

@@ -316,6 +316,7 @@ nav {
 nav {
   position: sticky;
   top: 0;
+  height: 70px;
   z-index: 999;
   background: white;
   padding: 10px 0;
@@ -406,22 +407,20 @@ nav .flex_content:nth-child(2) a:hover:after {
 }
 
 nav .ham {
-  width: 40px;
+  /* width: 40px; */
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  border: 2px solid var(--gray);
+  /* border: 2px solid var(--gray); */
   /* width: 40px;
   height: 40px; */
   color: var(--gray);
   float: right;
-  /* margin-right: 0; */
+  margin-right: 50px;
 }
 
-nav .ham:hover {
-  border: 2px solid var(--primary_lite);
-}
+
 
 .top_menu {
   background-color: var(--primary_dark);
