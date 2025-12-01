@@ -48,7 +48,7 @@
     position: sticky;
         top: 80px;
         /* Giữ phần tử ở đầu trang khi cuộn */
-        z-index: 999;
+        z-index: 10;
         /* Đảm bảo rằng nó sẽ nằm trên các phần tử khác */
         background-color: #fff;
         /* Tạo nền trắng cho phần tử khi cuộn */

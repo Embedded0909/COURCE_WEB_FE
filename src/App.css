@@ -305,7 +305,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 0.2rem 2rem;
-  z-index: 99;
+  z-index: 10;
   white-space: nowrap;
   transition: 0.5s;
   color: var(--lite);
