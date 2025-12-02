@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import { auth, googleProvider } from "../firebase";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { FaGoogle } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Header({ onReload }) {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(false);
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (currentUser) => {
@@ -28,6 +31,12 @@ function Header({ onReload }) {
     await signOut(auth);
     setUser(null);
     setOpenMenu(false);
+  };
+
+
+  const goToCourse = (id) => {
+    setOpenMenu(!openMenu)
+    navigate(`/cources`);
   };
   return (
     <>
@@ -75,10 +84,10 @@ function Header({ onReload }) {
           </figure>
         </section>
         <section className="flex_content nav_content" id="nav_content">
-          <a href="" className="active">
+          <Link to="/" className="active">
             TRANG CHỦ
-          </a>
-          <a href="">GIỎ HÀNG</a>
+          </Link>
+          <Link to="/cources">KHÓA HỌC CỦA TÔI</Link>
         </section>
         <section className="flex_content">
           {/* <a href="" className="ham">
@@ -94,7 +103,7 @@ function Header({ onReload }) {
                   src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
                   alt="Google"
                   width="22"
-                  
+
                 />
                 {/* <FaGoogle size={20} style={{ marginRight: 8, color: "#222" }} /> */}
               </>
@@ -112,6 +121,9 @@ function Header({ onReload }) {
                 {openMenu && (
                   <div className="user-dropdown">
                     <p className="user-email">{user.email}</p>
+                    <div className="cource-btn" onClick={() => goToCourse()}>
+                      Khóa học của tôi
+                    </div>
                     <button className="logout-btn" onClick={logout}>
                       Đăng xuất
                     </button>
