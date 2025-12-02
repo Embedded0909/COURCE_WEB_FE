@@ -1,10 +1,12 @@
 import Home from "../pages/Home/Home";
 import MyCourses from "../pages/Mycources/Mycources";
+import CoursePage from "../pages/CoursePage/CoursePage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const publicRoutes = [
   { path: "/", Component: Home },
-  { path: "/cources", Component: MyCourses },
+  { path: "/courses", Component: MyCourses },
+  { path: "/course/:id", Component: CoursePage },
   // <Route path="*" element={<NotFound />} />,
 ];
 

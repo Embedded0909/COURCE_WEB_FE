@@ -36,7 +36,7 @@ function Header({ onReload }) {
 
   const goToCourse = (id) => {
     setOpenMenu(!openMenu)
-    navigate(`/cources`);
+    navigate(`/courses`);
   };
   return (
     <>
@@ -87,7 +87,7 @@ function Header({ onReload }) {
           <Link to="/" className="active">
             TRANG CHỦ
           </Link>
-          <Link to="/cources">KHÓA HỌC CỦA TÔI</Link>
+          <Link to="/courses">KHÓA HỌC CỦA TÔI</Link>
         </section>
         <section className="flex_content">
           {/* <a href="" className="ham">
