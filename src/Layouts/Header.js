@@ -21,16 +21,23 @@ function Header({ onReload }) {
   const loginWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
+      console.log("This is data: ", result.user.email);
+      localStorage.setItem("userEmail", result.user.email);
+
       setUser(result.user);
+      navigate(`/`);
     } catch (error) {
       console.error("Login error:", error);
     }
   };
 
   const logout = async () => {
+    localStorage.removeItem("userEmail");
+
     await signOut(auth);
     setUser(null);
     setOpenMenu(false);
+    navigate(`/`);
   };
 
 

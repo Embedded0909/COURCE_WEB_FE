@@ -1,6 +1,7 @@
 import "./Home.css";
 import React from "react";
 import stm32Img from "../../images/STM32F1 HAL.png";
+
 import CourseCard from "../../components/cource/cource";
 
 function Home() {

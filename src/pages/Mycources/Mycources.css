@@ -81,3 +81,33 @@
 .btn-view:hover {
   background: #005ec7;
 }
+
+.login-warning-box {
+  background: #ffffff;
+  padding: 30px 25px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeInScale 0.25s ease-out;
+  max-width: 500px;
+  margin: auto;
+  margin-bottom: 200px;
+}
+
+.login-warning-box h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+}
+
+.login-warning-box h2 span {
+  color: #e53935;
+  /* đỏ đẹp */
+}
+
+.login-warning-box p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}

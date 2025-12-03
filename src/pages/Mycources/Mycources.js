@@ -1,7 +1,10 @@
 import React from "react";
 import "./Mycources.css";
 import IMG from "../../images/c embedded.png";
+import { useNavigate } from "react-router-dom";
 const MyCourses = () => {
+    const email = localStorage.getItem("userEmail");
+    const navigate = useNavigate();
     const courses = [
         {
             id: 1,
@@ -19,11 +22,16 @@ const MyCourses = () => {
         },
     ];
 
+    const goToCource = (id) => {
+        console.log("Email: ", email);
+
+        // navigate(`/course/${id}`);
+    }
+
     return (
         <div className="mycourses-container">
             <h1>Khóa Học Của Tôi</h1>
-
-            <div className="course-list">
+            {email ? <><div className="course-list">
                 {courses.map((course) => (
                     <div className="course-card" key={course.id}>
                         <img src={course.img} alt={course.title} className="course-img" />
@@ -39,11 +47,15 @@ const MyCourses = () => {
                                 ></div>
                             </div>
 
-                            <button className="btn-view">Tiếp tục học</button>
+                            <button onClick={() => goToCource(course.id)} className="btn-view">Tiếp tục học</button>
                         </div>
                     </div>
                 ))}
-            </div>
+            </div></> : <div className="login-warning-box">
+                <h2>Bạn phải <span>ĐĂNG NHẬP</span> để tiếp tục</h2>
+                <p>Vui lòng đăng nhập bằng Google để xem khóa học.</p>
+            </div>}
+
         </div>
     );
 };
