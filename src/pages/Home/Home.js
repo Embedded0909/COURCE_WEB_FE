@@ -1,27 +1,30 @@
 import "./Home.css";
 import React from "react";
 import stm32Img from "../../images/STM32F1 HAL.png";
-
+import Stm32TG from "../../images/stm32thanhghi.png";
+import Espidf from "../../images/espidf.png";
 import CourseCard from "../../components/cource/cource";
 
 function Home() {
   const courses = [
     {
-      image: stm32Img,
+      id: 1,
+      image: Stm32TG,
       tag: "STM32",
       title: "STM32 THANH GHI",
       oldPrice: "1.200.000₫",
       newPrice: "360.000₫",
-      description: `Vi điều khiển STM32 thanh ghi.<br/>- Ngoại vi<br/>- Sensor,...`,
+      description: `Vi điều khiển STM32 thanh ghi.<br/>- Ngoại vi<br/>- Memory,...`,
       link: "https://docs.google.com/document/d/1-m-1rWXeWirnZqyD3jf6-D07fNg9CIxU7PBn-R0Gau0/edit?tab=t.0",
     },
     {
-      image: stm32Img,
-      tag: "STM32",
-      title: "STM32 THANH GHI",
+      id: 2,
+      image: Espidf,
+      tag: "ESP32",
+      title: "ESP32 IDF",
       oldPrice: "1.200.000₫",
-      newPrice: "360.000₫",
-      description: `Vi điều khiển STM32 thanh ghi.<br/>- Ngoại vi<br/>- Sensor,...`,
+      newPrice: "270.000₫",
+      description: `Vi điều khiển ESP32 - IDF.<br/>- Ngoại vi<br/>- Sensor,...`,
       link: "https://docs.google.com/document/d/1-m-1rWXeWirnZqyD3jf6-D07fNg9CIxU7PBn-R0Gau0/edit?tab=t.0",
     },
   ];

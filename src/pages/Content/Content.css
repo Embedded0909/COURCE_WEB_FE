@@ -1,47 +1,97 @@
 .content-page {
-    max-width: 900px;
-    margin: 50px auto;
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-    color: #333;
+  width: 90%;
+  max-width: 900px;
+  margin: auto;
+  padding-top: 20px;
 }
 
-.content-page h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #1a73e8;
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.content-container {
+/* --- Course Box --- */
+.course-box {
+  display: flex;
+  gap: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+.course-thumb {
+  width: 400px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.course-info h2 {
+  margin-top: 0;
+}
+
+.course-stats {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.course-stats li {
+  margin: 6px 0;
+  font-size: 16px;
+}
+
+.dangky {
     display: flex;
-    flex-wrap: wrap;
-    gap: 50px;
-    justify-content: center;
-    align-items: flex-start;
 }
 
-.qr-section,
+/* --- QR Section --- */
+.qr-section {
+  text-align: center;
+  margin: 40px 0;
+  flex: 1;
+  align-items: center;
+  text-align: center;
+}
+
+.qr-image {
+  width: 200px;
+  margin-bottom: 12px;
+}
+
+.qr-section p {
+  margin-top: 5px;
+}
+
 .steps-section {
-    flex: 1 1 300px;
-    background: #f5f5f5;
+    /* background: #fff; */
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+}
+
+.step {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    margin: 15px 0;
+}
+
+.step-number {
+    background: #007bff;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    min-width: 80px;
     text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-.qr-section h2,
-.steps-section h2 {
-    margin-bottom: 15px;
-    color: #1a73e8;
-}
-
-.steps-section ol {
-    text-align: left;
-    padding-left: 20px;
-}
-
-.steps-section li {
-    margin-bottom: 10px;
-    line-height: 1.5;
+.step p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
 }

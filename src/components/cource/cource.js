@@ -1,6 +1,7 @@
 import Modal from "react-modal";
 import { useState } from "react";
-import "./cource.css"
+import "./cource.css";
+import { useNavigate } from "react-router-dom";
 
 const customStyles = {
   content: {
@@ -16,7 +17,6 @@ const customStyles = {
     background: "#fff",
     border: "none",
     textAlign: "center",
-    
   },
   overlay: {
     backgroundColor: "rgba(0,0,0,0.5)",
@@ -24,6 +24,7 @@ const customStyles = {
 };
 
 function CourseCard({
+  id,
   image,
   tag,
   title,
@@ -33,6 +34,8 @@ function CourseCard({
   link,
 }) {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const email = localStorage.getItem("userEmail");
+  const navigate = useNavigate();
   function openModal() {
     setIsOpen(true);
   }
@@ -42,6 +45,15 @@ function CourseCard({
   function closeModal() {
     setIsOpen(false);
   }
+
+  const handleRegister = (id) => {
+    navigate(`/content/${id}`);
+    // if(email){
+    //   navigate(`/content/${id}`);
+    // }else{
+    //     openModal();
+    // }
+  };
 
   return (
     <li>
@@ -97,7 +109,11 @@ function CourseCard({
 
         <aside className="fixed_flex">
           <span className="flex-content">
-            <div target="_blank" className="btn_donxem" onClick={openModal}>
+            <div
+              target="_blank"
+              className="btn_donxem"
+              onClick={() => handleRegister(id)}
+            >
               Đăng Ký
             </div>
           </span>

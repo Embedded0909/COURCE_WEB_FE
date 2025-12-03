@@ -1,33 +1,124 @@
 import React from "react";
 import "./Content.css";
+import Stm32TG from "../../images/stm32thanhghi.png";
+import Espidf from "../../images/espidf.png";
+import QR from "../../images/QR.jpg";
+import { useParams } from "react-router-dom";
 
 const Content = () => {
-    const qrImage = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform";
+  const qrImage = QR;
 
-    return (
-        <div className="content-page">
-            <h1>Khóa Học STM32 Cơ Bản</h1>
+  const courseInfo = [
+    {
+      title: "Khóa Học STM32 Thanh Ghi",
+      price: "360.000 VND",
+      thumbnail: Stm32TG,
+      description:
+        "Khóa học giúp bạn hiểu bản chất của vi điều khiển thông qua thanh ghi ngoại vi, startup, memory,.. và build bằng makefile,...",
+      totalLessons: 40,
+      duration: "30 giờ học",
+      level: "Nên học STM32 HAL trước",
+    },
+    {
+      title: "Khóa Học ESP32 IDF",
+      thumbnail: Espidf,
+      price: "360.000 VND",
+      description:
+        "Khóa học giúp bạn hiểu bản chất của vi điều khiển thông qua thanh ghi ngoại vi, startup, memory,.. và build bằng makefile,...",
+      totalLessons: 40,
+      duration: "30 giờ học",
+      level: "Nên học STM32 HAL trước",
+    },
+    {
+      title: "Khóa Học ESP32 IDF",
+      thumbnail: Espidf,
+      price: "360.000 VND",
+      description:
+        "Khóa học giúp bạn hiểu bản chất của vi điều khiển thông qua thanh ghi ngoại vi, startup, memory,.. và build bằng makefile,...",
+      totalLessons: 40,
+      duration: "30 giờ học",
+      level: "Nên học STM32 HAL trước",
+    },
+  ];
+  const { id } = useParams();
 
-            <div className="content-container">
-                <section className="qr-section">
-                    <h2>Quét mã QR để đăng ký</h2>
-                    <img src={qrImage} alt="QR Code đăng ký" />
-                    <p>Hoặc truy cập link: <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" rel="noopener noreferrer">Click vào đây</a></p>
-                </section>
+  const course = courseInfo[id - 1];
 
-                <section className="steps-section">
-                    <h2>Các bước đăng ký khóa học</h2>
-                    <ol>
-                        <li>Đăng nhập vào website bằng Google</li>
-                        <li>Truy cập trang khóa học cơ bản</li>
-                        <li>Quét mã QR hoặc nhấp vào link đăng ký</li>
-                        <li>Điền thông tin và gửi</li>
-                        <li>Bạn sẽ nhận được email xác nhận</li>
-                    </ol>
-                </section>
-            </div>
+  if (!course) return <h2 className="not-found">❌ Khóa học không tồn tại!</h2>;
+
+  return (
+    <div className="content-page">
+      <h1>{course.title}</h1>
+
+      {/* Thông tin khóa học */}
+      <div className="course-box">
+        <img src={course.thumbnail} alt="Thumbnail" className="course-thumb" />
+
+        <div className="course-info">
+          <h2>Thông tin khóa học</h2>
+          <h2 style={{ color: "#e63946", fontWeight: "bold" }}>
+            {course.price}
+          </h2>
+          <p>{course.description}</p>
+
+          <ul className="course-stats">
+            <li>
+              📚 Số bài học: <strong>{course.totalLessons}</strong>
+            </li>
+            <li>
+              ⏱ Thời lượng: <strong>{course.duration}</strong>
+            </li>
+            <li>
+              ⭐ Mức độ: <strong>{course.level}</strong>
+            </li>
+          </ul>
         </div>
-    );
+      </div>
+
+      {/* QR đăng ký */}
+      <div className="dangky">
+        <div className="qr-section">
+          <h2>Đăng ký khóa học</h2>
+
+          <img src={qrImage} alt="QR Code đăng ký" className="qr-image" />
+        </div>
+
+        {/* Steps */}
+        <div className="steps-section">
+          <h2>Các bước để tham gia</h2>
+
+          <div className="step">
+            <span className="step-number">Bước 1</span>
+            <p>
+              Đọc kỹ <strong>Thông tin khóa học</strong>.
+            </p>
+          </div>
+
+          <div className="step">
+            <span className="step-number">Bước 2</span>
+            <p>
+              Quét mã QR với Nội Dung: <strong>Tên khóa + tên học viên</strong>
+            </p>
+          </div>
+
+          <div className="step">
+            <span className="step-number">Bước 3</span>
+            <p>Chụp lại màn hình và gửi tới fanpage</p>
+          </div>
+
+          <div className="step">
+            <span className="step-number">Bước 4</span>
+            <p>Chờ khóa học được active (Ngay sau khi admin rep tin nhắn)</p>
+          </div>
+
+          <div className="step">
+            <span className="step-number">Bước 5</span>
+            <p>Chinh phục khóa học thui nèo 😋😋😎😎😎</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Content;
