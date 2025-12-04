@@ -1,46 +1,95 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Mycources.css";
-import IMG from "../../images/c embedded.png";
+import Stm32TG from "../../images/stm32thanhghi.png";
+import Espidf from "../../images/espidf.png";
 import { useNavigate } from "react-router-dom";
+
 const MyCourses = () => {
   const email = localStorage.getItem("userEmail");
   const navigate = useNavigate();
+
+  const [allowedCourses, setAllowedCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [networkError, setNetworkError] = useState(false);
+
   const courses = [
     {
       id: 1,
       title: "STM32 Thanh Ghi",
-      description: "Khóa học về lập trình thanh ghi, ngoại vi, sensor...",
-      img: IMG,
+      description: "Thanh ghi, driver, startup, makefile,...",
+      img: Stm32TG,
       progress: 60,
     },
     {
       id: 2,
-      title: "FreeRTOS Cơ Bản",
-      description: "Task, Queue, Semaphores, Event Groups,...",
-      img: IMG,
+      title: "ESP32 IDF",
+      description: "Ngoại vi, wifi, blue,...",
+      img: Espidf,
       progress: 20,
     },
   ];
 
-  const goToCource = (id) => {
-    console.log("Email: ", email);
+  useEffect(() => {
+    if (!email) {
+      setLoading(false);
+      return;
+    }
 
+    // Gọi API check email
+    fetch(
+      `https://script.google.com/macros/s/AKfycbzBtNGSPeQ9YazFxwGipytrffyMpndD-Ju6V6Q7Fl0R9giS4BrzfyJOeUQwtq-aoo8myg/exec?action=checkEmail&email=${email}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Luong Email", data);
+
+        setAllowedCourses(data.courses || []);
+        setLoading(false);
+      })
+      .catch((err) => { setNetworkError(true); console.error("Lỗi fetch:", err) });
+  }, [email]);
+
+  const goToCource = (id) => {
     navigate(`/course/${id}`);
   };
+
+  if (networkError) {
+    return (
+      <div className="mycourses-container">
+        <div className="login-warning-box">
+          <h2>Mạng không ổn định</h2>
+          <p>Vui lòng kiểm tra kết nối Internet và thử lại.</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return <div className="mycourses-container"><h2>Đang tải...</h2></div>;
+  }
 
   return (
     <div className="mycourses-container">
       <h1>Khóa Học Của Tôi</h1>
-      {email ? (
-        <>
-          <div className="course-list">
-            {courses.map((course) => (
+
+      {!email ? (
+        <div className="login-warning-box">
+          <h2>
+            Bạn phải <span>ĐĂNG NHẬP</span> để tiếp tục
+          </h2>
+          <p>Vui lòng đăng nhập bằng Google để xem khóa học.</p>
+        </div>
+      ) : allowedCourses.length === 0 ? (
+        <div className="login-warning-box">
+          <h2>Không có khóa học nào được mở cho email này</h2>
+        </div>
+      ) : (
+        <div className="course-list">
+          {courses
+            .filter((c) => allowedCourses.includes((c.id)))
+            .map((course) => (
               <div className="course-card" key={course.id}>
-                <img
-                  src={course.img}
-                  alt={course.title}
-                  className="course-img"
-                />
+                <img src={course.img} alt={course.title} className="course-img" />
 
                 <div className="course-info">
                   <h3>{course.title}</h3>
@@ -62,14 +111,6 @@ const MyCourses = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </>
-      ) : (
-        <div className="login-warning-box">
-          <h2>
-            Bạn phải <span>ĐĂNG NHẬP</span> để tiếp tục
-          </h2>
-          <p>Vui lòng đăng nhập bằng Google để xem khóa học.</p>
         </div>
       )}
     </div>

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function Header({ onReload }) {
   const [user, setUser] = useState(null);
+  const [networkError, setNetworkError] = useState(false);
   const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(false);
   useEffect(() => {
@@ -17,7 +18,17 @@ function Header({ onReload }) {
 
     return () => unsub(); // cleanup
   }, []);
+
+  useEffect(() => {
+    const handleOffline = () => alert("Bạn đã mất kết nối Internet.");
+    window.addEventListener("offline", handleOffline);
+    return () => window.removeEventListener("offline", handleOffline);
+  }, []);
   const loginWithGoogle = async () => {
+    if (!navigator.onLine) {
+      alert("Không có kết nối Internet. Vui lòng kiểm tra lại.");
+      return;
+    }
     try {
       const result = await signInWithPopup(auth, googleProvider);
       console.log("This is data: ", result.user.email);
@@ -26,6 +37,16 @@ function Header({ onReload }) {
       setUser(result.user);
       navigate(`/`);
     } catch (error) {
+      console.error("Firebase login error:", error);
+
+      // ❗ Lỗi network hoặc popup failed
+      if (error.code === "auth/network-request-failed") {
+        alert("Mạng không ổn định. Vui lòng kiểm tra lại kết nối.");
+      } else if (error.message.includes("Pending promise")) {
+        alert("Không thể đăng nhập vì mất kết nối. Thử lại khi có Internet.");
+      } else {
+        alert("Đăng nhập thất bại. Vui lòng thử lại.");
+      }
       console.error("Login error:", error);
     }
   };
@@ -90,7 +111,7 @@ function Header({ onReload }) {
           </figure>
         </section>
         <section className="flex_content nav_content" id="nav_content">
-          <Link to="/" className="active">
+          <Link to="/" className="">
             TRANG CHỦ
           </Link>
           <Link to="/courses">KHÓA HỌC CỦA TÔI</Link>

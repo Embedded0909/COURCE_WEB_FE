@@ -10,6 +10,7 @@ const CoursePage = () => {
 
   const [course, setCourse] = useState(null);
   const [selectedLesson, setSelectedLesson] = useState(null);
+  const [networkError, setNetworkError] = useState(false);
 
   useEffect(() => {
     fetch(API_URL)
@@ -40,10 +41,20 @@ const CoursePage = () => {
           setSelectedLesson(selectedCourse.lessons[0]);
         }
       })
-      .catch((err) => console.error("Lỗi fetch:", err));
+      .catch((err) => { setNetworkError(true); console.error("Lỗi fetch:", err) });
   }, [id]);
-
+  if (networkError) {
+    return (
+      <div className="mycourses-container">
+        <div className="login-warning-box">
+          <h2>Mạng không ổn định</h2>
+          <p>Vui lòng kiểm tra kết nối Internet và thử lại.</p>
+        </div>
+      </div>
+    );
+  }
   if (!course) return <h2 className="not-found">⏳ Đang tải khóa học...</h2>;
+
 
   return (
     <div className="course-container">
