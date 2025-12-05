@@ -53,7 +53,7 @@ const CoursePage = () => {
       </div>
     );
   }
-  if (!course) return <h2 className="not-found">⏳ Đang tải khóa học...</h2>;
+  if (!course) return <div className="loading-spinner"></div>;
 
 
   return (

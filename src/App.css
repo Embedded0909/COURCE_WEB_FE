@@ -1892,3 +1892,23 @@ header section aside:nth-child(3) {
 .sale-btn:hover {
   background: #d60000;
 }
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 7px solid #ddd;
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto;
+  margin-top: 250px;
+  margin-bottom: 100px;
+  /* text-align: center; */
+  /* align-items: center; */
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

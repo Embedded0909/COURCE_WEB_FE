@@ -65,7 +65,7 @@ const MyCourses = () => {
   }
 
   if (loading) {
-    return <div className="mycourses-container"><h2>Đang tải...</h2></div>;
+    return <div className="mycourses-container"><div className="loading-spinner"></div></div>;
   }
 
   return (

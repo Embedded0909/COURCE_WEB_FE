@@ -6,8 +6,10 @@ import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+
 function Header({ onReload }) {
   const [user, setUser] = useState(null);
+  const mEmail = localStorage.getItem("userEmail");
   const [networkError, setNetworkError] = useState(false);
   const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(false);
@@ -39,7 +41,7 @@ function Header({ onReload }) {
     } catch (error) {
       console.error("Firebase login error:", error);
 
-      // ❗ Lỗi network hoặc popup failed
+
       if (error.code === "auth/network-request-failed") {
         alert("Mạng không ổn định. Vui lòng kiểm tra lại kết nối.");
       } else if (error.message.includes("Pending promise")) {
@@ -115,6 +117,9 @@ function Header({ onReload }) {
             TRANG CHỦ
           </Link>
           <Link to="/courses">KHÓA HỌC CỦA TÔI</Link>
+          {user && user.email === "laptrinhembedded@gmail.com" && (<Link to="/admin">THÊM USER</Link>)}
+
+
         </section>
         <section className="flex_content">
           {/* <a href="" className="ham">
