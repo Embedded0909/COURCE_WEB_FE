@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
 import "./CoursePage.css";
 
@@ -41,7 +42,10 @@ const CoursePage = () => {
           setSelectedLesson(selectedCourse.lessons[0]);
         }
       })
-      .catch((err) => { setNetworkError(true); console.error("Lỗi fetch:", err) });
+      .catch((err) => {
+        setNetworkError(true);
+        console.error("Lỗi fetch:", err);
+      });
   }, [id]);
   if (networkError) {
     return (
@@ -54,7 +58,6 @@ const CoursePage = () => {
     );
   }
   if (!course) return <div className="loading-spinner"></div>;
-
 
   return (
     <div className="course-container">
@@ -78,11 +81,46 @@ const CoursePage = () => {
         <iframe
           width="100%"
           height="450"
-          src={selectedLesson?.video}
+          src={`${selectedLesson?.video}?controls=1&modestbranding=1&rel=0&iv_load_policy=3&fs=1&disablekb=0`}
+          onContextMenu={(e) => e.preventDefault()}
           title="Course Video"
           frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
         ></iframe>
+        {/* <ReactPlayer
+          src="https://www.youtube.com/watch?v=xeZmB-5AdgQ"
+          controls
+          width="60%"
+          height="300px"
+          style={{ width: "100%", height: "auto", aspectRatio: "16/9" }}
+          config={{
+            youtube: {
+              playerVars: {
+                autoplay: 0,
+                modestbranding: 1,
+                rel: 0,
+                fs: 1,
+                iv_load_policy: 3,
+              },
+            },
+          }}
+        /> */}
+        {/* <iframe
+          width="100%"
+          height="450"
+          src={`https://www.youtube-nocookie.com/embed/xeZmB-5AdgQ?modestbranding=1&rel=0&controls=1`}
+          title="Course Video"
+          frameBorder="0"
+          style={{ borderRadius: "8px" }}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+          allowFullScreen
+          onContextMenu={(e) => e.preventDefault()} // chặn chuột phải
+        ></iframe> */}
+        {/* <ReactPlayer
+          src="https://www.youtube.com/watch?v=xeZmB-5AdgQ"
+          style={{ width: "100%", height: "auto", aspectRatio: "16/9" }}
+        /> */}
       </main>
     </div>
   );
