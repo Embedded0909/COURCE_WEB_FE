@@ -3,6 +3,8 @@ import "./Content.css";
 import pi3B from "../../images/RAS PI 3B.png";
 import Stm32TG from "../../images/stm32thanhghi.png";
 import Espidf from "../../images/espidf.png";
+import COMBO from "../../images/FULL COMBO.png";
+
 import QR from "../../images/QR.jpg";
 import { useParams } from "react-router-dom";
 
@@ -37,6 +39,15 @@ const Content = () => {
       totalLessons: 20,
       duration: "10 giờ học",
       level: "Basic",
+    },
+    {
+      title: "COMBO - STM32 - ESP32 - RASPI",
+      thumbnail: COMBO,
+      price: "500.000 VND",
+      description: "Full combo 3 khóa",
+      totalLessons: 90,
+      duration: "...",
+      level: "Full combo",
     },
   ];
   const { id } = useParams();

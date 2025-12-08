@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import { useState } from "react";
 import "./cource.css";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const customStyles = {
   content: {
@@ -46,6 +47,8 @@ function CourseCard({
     setIsOpen(false);
   }
 
+  
+
   const handleRegister = (id) => {
     navigate(`/content/${id}`);
     // if(email){
@@ -56,70 +59,73 @@ function CourseCard({
   };
 
   return (
-    <li>
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <div style={{ marginBottom: "20px" }}>
-          <h2 style={{ margin: 0, color: "#333" }}>Bạn chưa đăng nhập</h2>
-          <p style={{ color: "#666", marginTop: "10px" }}>
-            Vui lòng đăng nhập để tiếp tục đăng ký khóa học
-          </p>
-        </div>
-
-        <button
-          onClick={closeModal}
-          style={{
-            padding: "10px 20px",
-            background: "#FF3B30",
-            color: "#fff",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer",
-            fontWeight: "bold",
-            transition: "background 0.2s",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.background = "#ff1f0f")}
-          onMouseOut={(e) => (e.currentTarget.style.background = "#FF3B30")}
+    <>
+     
+      <li>
+        <Modal
+          isOpen={modalIsOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
         >
-          Đóng
-        </button>
-      </Modal>
-      <figure>
-        <img src={image} alt="" />
-      </figure>
+          <div style={{ marginBottom: "20px" }}>
+            <h2 style={{ margin: 0, color: "#333" }}>Bạn chưa đăng nhập</h2>
+            <p style={{ color: "#666", marginTop: "10px" }}>
+              Vui lòng đăng nhập để tiếp tục đăng ký khóa học
+            </p>
+          </div>
 
-      <article className="padding_1x">
-        <strong className="tag">{tag}</strong>
+          <button
+            onClick={closeModal}
+            style={{
+              padding: "10px 20px",
+              background: "#FF3B30",
+              color: "#fff",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              transition: "background 0.2s",
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.background = "#ff1f0f")}
+            onMouseOut={(e) => (e.currentTarget.style.background = "#FF3B30")}
+          >
+            Đóng
+          </button>
+        </Modal>
+        <figure>
+          <img src={image} alt="" />
+        </figure>
 
-        <a href="#" className="title small">
-          {title}
-        </a>
+        <article className="padding_1x">
+          <strong className="tag">{tag}</strong>
 
-        <div className="price-tag">
-          <span className="old-price">{oldPrice}</span>
-          <span className="new-price">{newPrice}</span>
-        </div>
+          <a href="#" className="title small">
+            {title}
+          </a>
 
-        <p dangerouslySetInnerHTML={{ __html: description }}></p>
+          <div className="price-tag">
+            <span className="old-price">{oldPrice}</span>
+            <span className="new-price">{newPrice}</span>
+          </div>
 
-        <aside className="fixed_flex">
-          <span className="flex-content">
-            <div
-              target="_blank"
-              className="btn_donxem"
-              onClick={() => handleRegister(id)}
-            >
-              Đăng Ký
-            </div>
-          </span>
-        </aside>
-      </article>
-    </li>
+          <p dangerouslySetInnerHTML={{ __html: description }}></p>
+
+          <aside className="fixed_flex">
+            <span className="flex-content">
+              <div
+                target="_blank"
+                className="btn_donxem"
+                onClick={() => handleRegister(id)}
+              >
+                Đăng Ký
+              </div>
+            </span>
+          </aside>
+        </article>
+      </li>
+    </>
   );
 }
 

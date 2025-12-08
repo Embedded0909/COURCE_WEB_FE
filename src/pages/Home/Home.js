@@ -4,6 +4,9 @@ import raspi from "../../images/RAS PI 3B.png";
 import Stm32TG from "../../images/stm32thanhghi.png";
 import Espidf from "../../images/espidf.png";
 import CourseCard from "../../components/cource/cource";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const courses = [
@@ -38,6 +41,31 @@ function Home() {
       link: "https://docs.google.com/document/d/1-m-1rWXeWirnZqyD3jf6-D07fNg9CIxU7PBn-R0Gau0/edit?tab=t.0",
     },
   ];
+  const [timeLeft, setTimeLeft] = useState(7200); // 2 tiếng = 7200s
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (seconds) => {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+    return `${h}h ${m}m ${s}s`;
+  };
+  const handleRegister = (id) => {
+    navigate(`/content/${id}`);
+    // if(email){
+    //   navigate(`/content/${id}`);
+    // }else{
+    //     openModal();
+    // }
+  };
   return (
     <>
       <header class="flex">
@@ -66,6 +94,21 @@ function Home() {
           <span className="bar"></span>
         </section>
         <section className="slider padding_0x">
+          <div class="sale-box">
+            <div class="sale-title">🔥 FLASH SALE ĐANG DIỄN RA</div>
+
+            <div class="countdown">
+              Chỉ còn <span id="timer">01:50:00</span>
+            </div>
+
+            <div class="price">
+              🎁 Full combo 3 khóa học chỉ còn
+              <span class="highlight">500.000đ</span>
+            </div>
+            <div onClick={()=>{handleRegister(4)}} class="sale-btn">
+              Đăng Ký Ngay
+            </div>
+          </div>
           <ul className="card logo-slider blog-slider">
             <>
               {courses.map((item, index) => (

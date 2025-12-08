@@ -390,3 +390,60 @@ padding: 5px;
     transform: scale(1.05);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
+
+.sale-box {
+    background: #ffebeb;
+    padding: 50px 0 0 0;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px solid #ff4d4d;
+    width: 500px;
+    margin: 20px auto;
+    font-family: Arial;
+}
+
+.sale-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d60000;
+    margin-bottom: 10px;
+}
+
+.countdown {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#timer {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.price {
+    font-size: 18px;
+    padding-bottom: 30px;
+}
+
+
+.highlight {
+    color: #d60000;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.sale-btn {
+    cursor: pointer;
+    display: inline-block;
+    background: #ff4d4d;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+    margin-bottom: 20px;
+}
+
+.sale-btn:hover {
+    background: #d60000;
+}

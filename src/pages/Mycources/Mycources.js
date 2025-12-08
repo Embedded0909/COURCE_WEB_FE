@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Mycources.css";
 import Stm32TG from "../../images/stm32thanhghi.png";
 import Espidf from "../../images/espidf.png";
+import pi from "../../images/RAS PI 3B.png";
 import { useNavigate } from "react-router-dom";
 
 const MyCourses = () => {
@@ -18,13 +19,20 @@ const MyCourses = () => {
       title: "STM32 Thanh Ghi",
       description: "Thanh ghi, driver, startup, makefile,...",
       img: Stm32TG,
-      progress: 60,
+      progress: 20,
     },
     {
       id: 2,
       title: "ESP32 IDF",
       description: "Ngoại vi, wifi, blue,...",
       img: Espidf,
+      progress: 20,
+    },
+    {
+      id: 3,
+      title: "RASPI 3B",
+      description: "Ubuntu, server...",
+      img: pi,
       progress: 20,
     },
   ];
@@ -46,7 +54,10 @@ const MyCourses = () => {
         setAllowedCourses(data.courses || []);
         setLoading(false);
       })
-      .catch((err) => { setNetworkError(true); console.error("Lỗi fetch:", err) });
+      .catch((err) => {
+        setNetworkError(true);
+        console.error("Lỗi fetch:", err);
+      });
   }, [email]);
 
   const goToCource = (id) => {
@@ -65,7 +76,11 @@ const MyCourses = () => {
   }
 
   if (loading) {
-    return <div className="mycourses-container"><div className="loading-spinner"></div></div>;
+    return (
+      <div className="mycourses-container">
+        <div className="loading-spinner"></div>
+      </div>
+    );
   }
 
   return (
@@ -86,10 +101,14 @@ const MyCourses = () => {
       ) : (
         <div className="course-list">
           {courses
-            .filter((c) => allowedCourses.includes((c.id)))
+            .filter((c) => allowedCourses.includes(c.id))
             .map((course) => (
               <div className="course-card" key={course.id}>
-                <img src={course.img} alt={course.title} className="course-img" />
+                <img
+                  src={course.img}
+                  alt={course.title}
+                  className="course-img"
+                />
 
                 <div className="course-info">
                   <h3>{course.title}</h3>
