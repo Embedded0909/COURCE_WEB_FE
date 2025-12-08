@@ -7,6 +7,7 @@ const API_URL =
   "https://script.google.com/macros/s/AKfycbzBtNGSPeQ9YazFxwGipytrffyMpndD-Ju6V6Q7Fl0R9giS4BrzfyJOeUQwtq-aoo8myg/exec";
 
 const CoursePage = () => {
+  // const email = localStorage.getItem("userEmail");
   const { id } = useParams();
 
   const [course, setCourse] = useState(null);
@@ -14,33 +15,45 @@ const CoursePage = () => {
   const [networkError, setNetworkError] = useState(false);
 
   useEffect(() => {
-    fetch(API_URL)
+    const email = localStorage.getItem("userEmail");
+
+    if (!email) {
+      console.error("Không có email => không thể load bài học");
+      return;
+    }
+
+    const url = `${API_URL}?action=getLessons&course_id=${id}&email=${email}`;
+
+    fetch(url)
       .then((res) => res.json())
-      .then((rows) => {
-        // Group theo course_id
-        const courses = {};
-
-        rows.forEach((r) => {
-          if (!courses[r.course_id]) {
-            courses[r.course_id] = {
-              title: r.course_title,
-              lessons: [],
-            };
-          }
-
-          courses[r.course_id].lessons.push({
-            id: Number(r.lesson_id),
-            title: r.lesson_title,
-            video: r.video_url,
-          });
-        });
-
-        const selectedCourse = courses[id];
-
-        if (selectedCourse) {
-          setCourse(selectedCourse);
-          setSelectedLesson(selectedCourse.lessons[0]);
+      .then((data) => {
+        if (!data.success) {
+          console.error("Access denied hoặc lỗi:", data.message);
+          alert("Truy cập trái phép");
+          setNetworkError(true);
+          return;
         }
+
+        const lessons = data.lessons;
+
+        if (!lessons || lessons.length === 0) {
+          alert("Bạn chưa có khóa học nào");
+          setNetworkError(true);
+          return;
+        }
+
+        // Tạo object course
+        const course = {
+          title: lessons[0].course_title,
+          lessons: lessons.map((l) => ({
+            id: Number(l.lesson_id),
+            title: l.lesson_title,
+            video: l.video_url,
+          })),
+        };
+
+        setCourse(course);
+        setSelectedLesson(course.lessons[0]);
       })
       .catch((err) => {
         setNetworkError(true);
@@ -88,39 +101,6 @@ const CoursePage = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
-        {/* <ReactPlayer
-          src="https://www.youtube.com/watch?v=xeZmB-5AdgQ"
-          controls
-          width="60%"
-          height="300px"
-          style={{ width: "100%", height: "auto", aspectRatio: "16/9" }}
-          config={{
-            youtube: {
-              playerVars: {
-                autoplay: 0,
-                modestbranding: 1,
-                rel: 0,
-                fs: 1,
-                iv_load_policy: 3,
-              },
-            },
-          }}
-        /> */}
-        {/* <iframe
-          width="100%"
-          height="450"
-          src={`https://www.youtube-nocookie.com/embed/xeZmB-5AdgQ?modestbranding=1&rel=0&controls=1`}
-          title="Course Video"
-          frameBorder="0"
-          style={{ borderRadius: "8px" }}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-          allowFullScreen
-          onContextMenu={(e) => e.preventDefault()} // chặn chuột phải
-        ></iframe> */}
-        {/* <ReactPlayer
-          src="https://www.youtube.com/watch?v=xeZmB-5AdgQ"
-          style={{ width: "100%", height: "auto", aspectRatio: "16/9" }}
-        /> */}
       </main>
     </div>
   );

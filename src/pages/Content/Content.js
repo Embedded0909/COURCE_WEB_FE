@@ -1,5 +1,6 @@
 import React from "react";
 import "./Content.css";
+import pi3B from "../../images/RAS PI 3B.png";
 import Stm32TG from "../../images/stm32thanhghi.png";
 import Espidf from "../../images/espidf.png";
 import QR from "../../images/QR.jpg";
@@ -22,22 +23,20 @@ const Content = () => {
     {
       title: "Khóa Học ESP32 IDF",
       thumbnail: Espidf,
-      price: "360.000 VND",
-      description:
-        "Khóa học giúp bạn hiểu bản chất của vi điều khiển thông qua thanh ghi ngoại vi, startup, memory,.. và build bằng makefile,...",
-      totalLessons: 40,
+      price: "270.000 VND",
+      description: "Khóa học về ESP32 IDF",
+      totalLessons: 30,
       duration: "30 giờ học",
-      level: "Nên học STM32 HAL trước",
+      level: "Basic",
     },
     {
-      title: "Khóa Học ESP32 IDF",
-      thumbnail: Espidf,
-      price: "360.000 VND",
-      description:
-        "Khóa học giúp bạn hiểu bản chất của vi điều khiển thông qua thanh ghi ngoại vi, startup, memory,.. và build bằng makefile,...",
-      totalLessons: 40,
-      duration: "30 giờ học",
-      level: "Nên học STM32 HAL trước",
+      title: "Khóa Học Raspi 3B",
+      thumbnail: pi3B,
+      price: "60.000 VND",
+      description: "Khóa học về Raspi 3B basic",
+      totalLessons: 20,
+      duration: "10 giờ học",
+      level: "Basic",
     },
   ];
   const { id } = useParams();
